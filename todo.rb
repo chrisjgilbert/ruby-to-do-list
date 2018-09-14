@@ -1,5 +1,5 @@
 
-# List Class
+# List
 class List
 
 	attr_reader :all_tasks
@@ -16,11 +16,10 @@ class List
 		@all_tasks
 	end
 
-end
+end	
 
 
-
-# Task Class
+# Task
 class Task
 
 	attr_reader :description
@@ -29,15 +28,22 @@ class Task
 		@description = description
 	end
 
+	def to_s
+		@description
+	end
 
 end
 
 
-# Get program to load
+# Program Runner
 if __FILE__ == $PROGRAM_NAME
-          list = List.new
-          puts 'You have created a new list'
-          list.add(Task.new('Go shopping'))
-          puts 'Your have added #{@description} to the task list!'
-          puts list.show
-        end 
+	# create new list
+	my_list = List.new
+	puts 'You have created a new list'
+	# add new task to list
+	puts 'Enter a task to add you your list'
+	my_list.add(Task.new(gets.chomp))	
+	# display list
+	puts 'Your list: '
+	puts my_list.show
+end
