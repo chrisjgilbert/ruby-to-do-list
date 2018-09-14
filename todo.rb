@@ -1,3 +1,33 @@
+# MODULEs ===========================================
+
+module Menu
+	
+	def menu
+		"Hello, welcome to Chris' To Do List!
+		What would you like to do?
+		A) Add
+		S) Show
+		Q) Quit"
+	end
+
+	def show
+		menu
+	end
+
+end
+
+module Promptable
+
+	def prompt(message = 'What would you like to do?', symbol = ':> ')
+		puts message
+		puts symbol
+		user_input = gets.chomp
+	end
+
+end
+
+
+# CLASSES ===========================================
 
 # List
 class List
@@ -37,6 +67,7 @@ end
 
 # Program Runner
 if __FILE__ == $PROGRAM_NAME
+
 	# create new list
 	my_list = List.new
 	puts 'You have created a new list'
@@ -46,4 +77,11 @@ if __FILE__ == $PROGRAM_NAME
 	# display list
 	puts 'Your list: '
 	puts my_list.show
+
 end
+
+
+
+
+
+
