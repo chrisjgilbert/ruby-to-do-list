@@ -3,11 +3,7 @@
 module Menu
 	
 	def menu
-		"Hello, welcome to Chris' To Do List!
-		What would you like to do?
-		A) Add
-		S) Show
-		Q) Quit"
+		"What would you like to do? A) Add, S) Show, Q) Quit"
 	end
 
 	def show
@@ -19,9 +15,9 @@ end
 module Promptable
 
 	def prompt(message = 'What would you like to do?', symbol = ':> ')
-		puts message
-		puts symbol
-		user_input = gets.chomp
+		print message
+		print symbol
+		gets.chomp
 	end
 
 end
@@ -68,16 +64,24 @@ end
 # Program Runner
 if __FILE__ == $PROGRAM_NAME
 
-	# create new list
-	my_list = List.new
-	puts 'You have created a new list'
-	# add new task to list
-	puts 'Enter a task to add you your list'
-	my_list.add(Task.new(gets.chomp))	
-	# display list
-	puts 'Your list: '
-	puts my_list.show
+	include Menu
+	include Promptable
 
+	list = List.new
+	puts 'Please choose from the following list'
+	until ['q'].include?(user_input = prompt(show).downcase)
+		case user_input
+			when 'a'
+				list.add(Task.new(prompt('What is the task you would 
+				like to accomplish?')))
+			when 's'
+				puts "Current To Do List:"
+				puts list.show
+			else
+				puts "Sorry I didn't catch that"
+		end
+	end
+	puts 'Thanks for using the menu system!'
 end
 
 
