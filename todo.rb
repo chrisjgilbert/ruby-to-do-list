@@ -1,6 +1,7 @@
 # =======MODULES================ #
 
 # Menu Module
+
 module Menu
 	
 	def menu
@@ -11,7 +12,8 @@ end
 
 
 
-# Promptable Module 
+# Promptable Module
+
 module Promptable
 
 	def prompt(message, symbol = ':> ')
@@ -26,6 +28,7 @@ end
 # =======CLASSES================== #
 
 # List Class
+
 class List
 
 	attr_reader :all_tasks
@@ -56,6 +59,7 @@ end
 
 
 # Task Class
+
 class Task
 
 	attr_reader :description
@@ -87,8 +91,12 @@ if __FILE__ == $PROGRAM_NAME
 		when 'w'
 			list.write_to_file(prompt('What file would you like to write to?'))
 		when 'r'
-			list.read_from_file(prompt('Which file would you like to read?'))
-			puts list.show
+			begin
+				list.read_from_file(prompt('Which file would you like to read?'))
+				puts list.show
+			rescue
+				puts "That file was not recognized!"
+			end
 		else
 			puts "Sorry I didn't catch that"
 		end
