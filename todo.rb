@@ -4,10 +4,12 @@
 module Menu
 	
 	def menu
-		"What would you like to do? A) Add, S) Show, W) Write or Q) Quit"
+		"What would you like to do? A) Add, S) Show, W) Write, R) Read or Q) Quit"
 	end
 
 end
+
+
 
 # Promptable Module 
 module Promptable
@@ -40,25 +42,15 @@ class List
 		@all_tasks
 	end
 
-	# version 1
-	# def write_to_file(filename)
-	# 	file = File.new(filename, 'w')
-	# 	@all_tasks.each { |task| file.puts(task) }
-	# 	file.close
-	# end
-
-# version 2
 	def write_to_file(filename)
-		file = File.new(filename, 'w')
-		@all_tasks.map(&:to_s).join('\n')
-		@all_tasks.each { |task| file.puts(task) }
-		file.close
+		IO.write(filename, @all_tasks.map(&:to_s).join("\n"))
 	end
 
-	# def write_to_file(filename)
- #    IO.write(filename, @all_tasks.map(&:to_s).join("\n"))
- #  end
-
+	def read_from_file(filename)
+		IO.readlines(filename).each do |line|
+			add(Task.new(line.chomp))
+		end
+	end
 
 end	
 
@@ -75,8 +67,6 @@ class Task
 	def to_s
 		@description
 	end
-
-
 
 end
 
@@ -96,6 +86,9 @@ if __FILE__ == $PROGRAM_NAME
 			puts list.show
 		when 'w'
 			list.write_to_file(prompt('What file would you like to write to?'))
+		when 'r'
+			list.read_from_file(prompt('Which file would you like to read?'))
+			puts list.show
 		else
 			puts "Sorry I didn't catch that"
 		end
