@@ -4,7 +4,7 @@
 module Menu
 	
 	def menu
-		"What would you like to do? A) Add, S) Show, Q) Quit"
+		"What would you like to do? A) Add, S) Show, W) Write or Q) Quit"
 	end
 
 end
@@ -40,6 +40,26 @@ class List
 		@all_tasks
 	end
 
+	# version 1
+	# def write_to_file(filename)
+	# 	file = File.new(filename, 'w')
+	# 	@all_tasks.each { |task| file.puts(task) }
+	# 	file.close
+	# end
+
+# version 2
+	def write_to_file(filename)
+		file = File.new(filename, 'w')
+		@all_tasks.map(&:to_s).join('\n')
+		@all_tasks.each { |task| file.puts(task) }
+		file.close
+	end
+
+	# def write_to_file(filename)
+ #    IO.write(filename, @all_tasks.map(&:to_s).join("\n"))
+ #  end
+
+
 end	
 
 
@@ -55,6 +75,8 @@ class Task
 	def to_s
 		@description
 	end
+
+
 
 end
 
@@ -72,9 +94,12 @@ if __FILE__ == $PROGRAM_NAME
 		when 's'
 			puts "Current To Do List:"
 			puts list.show
+		when 'w'
+			list.write_to_file(prompt('What file would you like to write to?'))
 		else
 			puts "Sorry I didn't catch that"
 		end
+		prompt('Press enter to continue', '')
 	end
 	puts 'Thanks for using the menu system!'
 end
