@@ -5,7 +5,7 @@
 module Menu
 	
 	def menu
-		"What would you like to do? A) Add, S) Show, W) Write, R) Read or Q) Quit"
+		"What would you like to do? A) Add, S) Show, D) Delete, W) Write, R) Read or Q) Quit"
 	end
 
 end
@@ -42,7 +42,9 @@ class List
 	end
 
 	def show
-		@all_tasks
+		@all_tasks.map.with_index(1) do |t, i|
+      		"#{i}) #{t}"
+    	end
 	end
 
 	def write_to_file(filename)
@@ -53,6 +55,10 @@ class List
 		IO.readlines(filename).each do |line|
 			add(Task.new(line.chomp))
 		end
+	end
+
+	def delete
+		
 	end
 
 end	
