@@ -1,7 +1,5 @@
 # =======MODULES================ #
-
 # Menu Module
-
 module Menu
 	
 	def menu
@@ -13,7 +11,6 @@ end
 
 
 # Promptable Module
-
 module Promptable
 
 	def prompt(message, symbol = ':> ')
@@ -26,9 +23,7 @@ end
 
 
 # =======CLASSES================== #
-
 # List Class
-
 class List
 
 	attr_reader :all_tasks
@@ -65,7 +60,6 @@ end
 
 
 # Task Class
-
 class Task
 
 	attr_reader :description
@@ -81,7 +75,6 @@ class Task
 end
 
 # =======PROGRAM RUNNER================ #
-
 if __FILE__ == $PROGRAM_NAME
 	include Menu
 	include Promptable
@@ -93,6 +86,11 @@ if __FILE__ == $PROGRAM_NAME
 			list.add(Task.new(prompt('What is the task would you like to accomplish?')))
 		when 's'
 			puts "Current To Do List:"
+			puts list.show
+		when 'd'
+			puts list.show
+			list.delete(prompt('Which task would you like to delete?').to_i)
+			puts "Updated List:"
 			puts list.show
 		when 'w'
 			list.write_to_file(prompt('What file would you like to write to?'))
