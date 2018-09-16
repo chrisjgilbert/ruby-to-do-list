@@ -57,8 +57,8 @@ class List
 		end
 	end
 
-	def delete
-		
+	def delete(task_number)
+		@all_tasks.delete_at(task_number-1)
 	end
 
 end	
